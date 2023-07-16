@@ -1,0 +1,21 @@
+# docker-compose.yml
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=frosty
+      - POSTGRES_PASSWORD=sarriball
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/come_across
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
