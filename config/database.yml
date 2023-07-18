@@ -22,6 +22,7 @@ development:
 test:
   <<: *default
   database: come_across_test
+  host: localhost
 
 production:
   <<: *default
