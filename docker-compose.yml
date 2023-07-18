@@ -3,9 +3,6 @@ version: '3'
 services:
   db:
     image: postgres
-    environment:
-      - POSTGRES_USER=frosty
-      - POSTGRES_PASSWORD=sarriball
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
     ports:
