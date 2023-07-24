@@ -1,0 +1,12 @@
+<h1>Visits</h1>
+
+<% @visits.each do |visit| %>
+  <div>
+    <h3><%= visit.name %></h3>
+    <p><%= visit.address %></p>
+    <p>Latitude: <%= visit.latitude %></p>
+    <p>Longitude: <%= visit.longitude %></p>
+  </div>
+<% end %>
+
+<%= link_to 'Add a New Visit', new_visit_path %>

@@ -3,4 +3,8 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#login'
   get 'signup', to: 'sessions#signup'
   post 'create-user', to: 'sessions#create'
+
+  resources :visits
+
+  root to: 'visits#index'
 end

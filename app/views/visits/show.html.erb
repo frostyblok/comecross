@@ -1,0 +1,22 @@
+<h1><%= @visit.name %></h1>
+
+<div id="map" style="height: 500px;"></div>
+
+<script>
+    function initMap() {
+        var visit = { lat: <%= @visit.latitude %>, lng: <%= @visit.longitude %> };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: visit
+        });
+        new google.maps.Marker({
+            position: visit,
+            map: map,
+            title: '<%= @visit.name %>'
+        });
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_KEY'] %>&callback=initMap" async defer></script>
+
+<%= link_to 'Back', root_path %>
