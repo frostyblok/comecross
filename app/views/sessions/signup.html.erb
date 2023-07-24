@@ -1,0 +1,14 @@
+<!-- Signup Form -->
+<h2>Signup</h2>
+<%= form_tag create_user_path do %>
+  <%= label_tag :email, 'Email' %>
+  <%= email_field_tag :email, nil, required: true %>
+
+  <%= label_tag :first_name, 'Firstname' %>
+  <%= text_field_tag :first_name, nil, required: true %>
+
+  <%= label_tag :last_name, 'Lastname' %>
+  <%= text_field_tag :last_name, nil, required: true %>
+
+  <%= submit_tag 'Signup' %>
+<% end %>
