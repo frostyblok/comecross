@@ -14,6 +14,8 @@ class VisitsController < ApplicationController
   def create
     @visit = Visit.new(visit_params)
     if @visit.save
+      @visit.images.attach(params[:images]) if params[:images]
+
       redirect_to visits_path
     else
       render :new
@@ -21,6 +23,6 @@ class VisitsController < ApplicationController
   end
 
   def visit_params
-    params.require(:visit).permit(:name, :address, :user_id, comment_attributes: %i[id text ])
+    params.require(:visit).permit(:name, :address, :user_id, images: [], comment_attributes: %i[id text ])
   end
 end

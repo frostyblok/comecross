@@ -3,6 +3,7 @@ class Visit < ApplicationRecord
   has_many :visits_categories
   has_many :categories, through: :visits_categories
   has_many :comments
+  has_many_attached :images
 
   validates_presence_of :address, :latitude, :longitude
   validates :name, presence: true, uniqueness: { scope: :user_id, message: "You already have a visit with that name" }
