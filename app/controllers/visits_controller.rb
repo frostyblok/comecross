@@ -21,6 +21,6 @@ class VisitsController < ApplicationController
   end
 
   def visit_params
-    params.require(:visit).permit(:name, :address, :user_id)
+    params.require(:visit).permit(:name, :address, :user_id, comment_attributes: %i[id text ])
   end
 end

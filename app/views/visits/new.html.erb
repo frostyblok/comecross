@@ -13,6 +13,13 @@
 
   <%= form.hidden_field :user_id, value: User.first.id %>
 
+  <%= form.fields_for :comment, class:'form' do |comment_field| %>
+    <div class="form-group">
+      <p>Comment:</p>
+      <%= comment_field.text_field :text, class:"form-control" %>
+    </div>
+  <% end %>
+
   <div>
     <%= form.submit 'Create Place' %>
   </div>

@@ -2,6 +2,11 @@
 
 <div id="map" style="height: 500px;"></div>
 
+<h2>Comments</h2>
+<% @visit.comments.each do |comment| %>
+  <p><%= comment.text %></p>
+<% end %>
+
 <script>
     function initMap() {
         var visit = { lat: <%= @visit.latitude %>, lng: <%= @visit.longitude %> };
