@@ -11,6 +11,18 @@
     <%= form.text_field :address %>
   </div>
 
+  <div>
+    <%= form.label :category_ids, 'Categories' %><br>
+    <% Category.all.each do |category| %>
+      <%= form.check_box :category_ids, { multiple: true }, category.id, nil %>
+      <%= category.name %><br>
+      <%= form.fields_for 'category[ratings][]', category.ratings.build do |rating_fields| %>
+        <%= rating_fields.label :value, 'Rating (0-10)' %>
+        <%= rating_fields.number_field :value, in: 0..10, step: 1 %>
+      <% end %>
+    <% end %>
+  </div>
+
   <%= form.hidden_field :user_id, value: User.first.id %>
 
   <%= form.fields_for :comment, class:'form' do |comment_field| %>

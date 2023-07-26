@@ -7,6 +7,18 @@
     <p>Latitude: <%= visit.latitude %></p>
     <p>Longitude: <%= visit.longitude %></p>
   </div>
+
+
+  <h5>Ratings</h5>
+  <% visit.categories.each do |category| %>
+    <h3><%= category.name %></h3>
+    <% rating = visit.ratings.find_by(category_id: category.id) %>
+    <% if rating %>
+      <p>Rating: <%= rating.value %>/10</p>
+    <% else %>
+      <p>No rating yet</p>
+    <% end %>
+  <% end %>
 <% end %>
 
 <%= link_to 'Add a New Visit', new_visit_path %>
