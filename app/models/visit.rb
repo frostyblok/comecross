@@ -10,7 +10,7 @@ class Visit < ApplicationRecord
 
   before_validation :update_coordinates, if: :address_changed?
 
-  accepts_nested_attributes_for :comments, reject_if: proc { |attributes| attributes['name'].blank? }
+  accepts_nested_attributes_for :comments
 
   private
 
