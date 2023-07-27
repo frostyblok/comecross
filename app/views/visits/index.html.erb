@@ -8,6 +8,11 @@
     <p>Longitude: <%= visit.longitude %></p>
   </div>
 
+  <h5>Comments</h5>
+  <% visit.comments.each do |comment| %>
+    <p><%= comment.content %></p>
+  <% end %>
+
 
   <h5>Ratings</h5>
   <% visit.categories.each do |category| %>
@@ -18,6 +23,11 @@
     <% else %>
       <p>No rating yet</p>
     <% end %>
+  <% end %>
+
+  <h5>Images</h5>
+  <% visit.images.each do |image| %>
+    <%= image_tag(image.file) %>
   <% end %>
 <% end %>
 
