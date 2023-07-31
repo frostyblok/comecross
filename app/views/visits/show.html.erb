@@ -1,11 +1,51 @@
-<h1><%= @visit.name %></h1>
+<%= render 'header' %>
+
+<% visit = @visit %>
 
 <div id="map" style="height: 500px;"></div>
 
-<h2>Comments</h2>
-<% @visit.comments.each do |comment| %>
-  <p><%= comment.text %></p>
-<% end %>
+<div class="container">
+  <div class="mt-3">
+    <div class="d-flex justify-content-between">
+      <h3><%= visit.name %></h3>
+      <div class="d-flex">
+        <%= link_to 'Edit Visit', edit_visit_path(visit), class:'edit-visit', style: 'margin-right: 10px;' %>
+        <%= link_to 'Delete Visit', visit_path(visit), class:'edit-visit', method: :delete, data: { confirm: 'Are you sure?' }  %>
+      </div>
+
+    </div>
+
+    <p><%= visit.address %></p>
+    <div class="d-flex">
+      <p style="margin-right: 10px;">Latitude: <%= visit.latitude %></p>
+      <p>Longitude: <%= visit.longitude %></p>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <h5>Ratings</h5>
+    <% @visits_categories_ratings.each do |visits_categories_rating| %>
+      <div class="d-flex">
+        <div style="margin-right: 5px;"><%= visits_categories_rating.category_name %>:</div>
+        <div><%= visits_categories_rating.rating.value %>/10</div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-3">
+    <h5>Images</h5>
+    <% visit.images.each do |image| %>
+      <%= image_tag image, style: 'height: 300px;width:300px;object-fit:cover;' %>
+    <% end %>
+  </div>
+
+  <div class="mt-3">
+    <h5>Comments</h5>
+    <% visit.comments.each do |comment| %>
+      <p><%= comment.text %></p>
+    <% end %>
+  </div>
+</div>
 
 <script>
     function initMap() {

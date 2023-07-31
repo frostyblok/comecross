@@ -1,0 +1,52 @@
+<%= form_with model: visit, local: true do |form| %>
+  <div class="form-group mb-3">
+    <%= form.label :name, {:class => "form-label"} %>
+    <%= form.text_field :name, {:class => "form-control"} %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= form.label :address, {:class => "form-label"} %>
+    <%= form.text_field :address, {:class => "form-control"} %>
+  </div>
+
+  <% if visit.new_record? %>
+    <div class="form-group mb-3">
+      <%= form.label :category_ids, 'Categories', {:class => "form-label"} %>
+      <% Category.all.each do |category| %>
+        <div class="category d-flex justify-content-between mt-2">
+          <div class="category-checkbox d-flex">
+            <%= form.check_box :category_ids, { multiple: true }, category.id, nil %>
+            <div class="category-name" style="margin-left: 15px;"><%= category.name %></div>
+          </div>
+          <div class="rating-checkbox">
+            <%= form.fields_for 'category[ratings][]', Rating.new do |rating_fields| %>
+              <%= rating_fields.label :value, 'Rating (0-10)' %>
+              <%= rating_fields.number_field :value, in: 0..10, step: 1 %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :user_id, value: User.first.id %>
+
+  <div class="form-group mb-3">
+    <%= form.fields_for :comments, comments,  class:'form' do |comment_field| %>
+      <div class="">
+        <p>Comment:</p>
+        <%= comment_field.text_field :text, class:"form-control" %>
+      </div>
+    <% end %>
+  </div>
+
+
+  <div class="form-group mb-3">
+    <%= form.label :images, {:class => "form-label"} %>
+    <%= form.file_field :images, {:class => "form-control", multiple: true} %>
+  </div>
+
+  <div>
+    <%= form.submit 'Save Place', :class => "btn btn-primary" %>
+  </div>
+<% end %>

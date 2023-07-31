@@ -1,34 +1,24 @@
-<h1>Visits</h1>
+<%= render 'header' %>
 
-<% @visits.each do |visit| %>
-  <div>
-    <h3><%= visit.name %></h3>
-    <p><%= visit.address %></p>
-    <p>Latitude: <%= visit.latitude %></p>
-    <p>Longitude: <%= visit.longitude %></p>
+<div class="container">
+  <h1 class="text-center">Visits</h1>
+
+  <div class="row">
+    <div class="col-12">
+      <%= link_to 'Add New Visit +', new_visit_path, class:'btn btn-primary mb-5' %>
+    </div>
   </div>
 
-  <h5>Comments</h5>
-  <% visit.comments.each do |comment| %>
-    <p><%= comment.content %></p>
-  <% end %>
-
-
-  <h5>Ratings</h5>
-  <% visit.categories.each do |category| %>
-    <h3><%= category.name %></h3>
-    <% rating = visit.ratings.find_by(category_id: category.id) %>
-    <% if rating %>
-      <p>Rating: <%= rating.value %>/10</p>
-    <% else %>
-      <p>No rating yet</p>
+  <div class="row flex-wrap">
+    <% @visits.each do |visit| %>
+      <div class="card" style="width: 18rem; margin-right: 15px; margin-bottom: 15px;">
+        <div class="card-body">
+          <h5 class="card-title"><%= visit.name %></h5>
+          <p class="card-text"><%= visit.address %></p>
+          <%= link_to 'View Visit', visit_path(visit), class:'btn btn-primary' %>
+        </div>
+      </div>
     <% end %>
-  <% end %>
+  </div>
 
-  <h5>Images</h5>
-  <% visit.images.each do |image| %>
-    <%= image_tag(image.file) %>
-  <% end %>
-<% end %>
-
-<%= link_to 'Add a New Visit', new_visit_path %>
+</div>

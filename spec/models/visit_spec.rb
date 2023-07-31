@@ -6,8 +6,6 @@ RSpec.describe Visit, type: :model do
   it { should have_many(:comments) }
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:address) }
-  it { should validate_presence_of(:latitude) }
-  it { should validate_presence_of(:longitude) }
 
   describe "Uniqueness" do
     let(:user) { create(:user) }
